@@ -1,5 +1,5 @@
 body {
-	background-color: #FFEC9F;
+	background-color: lightblue;
 	font-family: sans-serif;
 }
 
@@ -53,9 +53,17 @@ h1 {
 	clear: both;
 }
 
+/*======================================================================== table ========================================================================*/
+
+table {
+	width: 90%;
+	margin: 20px auto;
+}
+
 table,th,td {
 	border: 1px solid silver;
 	border-collapse: collapse;
+	padding: 2px 5px;
 }
 
 thead tr,tfoot tr {
@@ -79,6 +87,12 @@ tbody tr:nth-child(odd) {
 tbody tr:hover {
 	background-color: #FFEC9F;
 }
+
+.status {
+	width: 120px;
+}
+
+/*======================================================================== ========================================================================*/
 
 label {
 	cursor: pointer;
