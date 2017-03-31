@@ -3,13 +3,12 @@
 <%@taglib prefix="v" uri='http://vdab.be/tags'%>
 <!doctype html>
 <html lang='nl'>
-<v:head title='Fietsacademy' />
+<v:head title='Toys for boys' />
 <body>
 	<header>
 		<v:menu />
-		<h1>De fietsacademy</h1>
-		<h2>Leren fietsen met professionals</h2>
-		<img src='<c:url value="/images/logo.jpg"/>' alt='fietsers' id='logo' />
+		<h1>Welkom bij Toys for Boys</h1>
+		<img src='<c:url value="/images/logo.jpg"/>' alt='logo' id='logo' />
 	</header>
 </body>
 </html>
