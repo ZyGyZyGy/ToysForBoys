@@ -2,6 +2,8 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,82 +27,92 @@ import be.vdab.enums.Status;
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Temporal(TemporalType.DATE)
     private Date orderDate;
-    
+
     @Temporal(TemporalType.DATE)
     private Date requiredDate;
-    
+
     @Temporal(TemporalType.DATE)
     private Date shippedDate;
-    
+
     private String comments;
-    
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customerId")
     private Customer customer;
-    
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderDetail> orderdetails;
+
     @Enumerated(EnumType.STRING)
     private Status status;
-    
+
     @Version
     private long version;
 
-    public Order(Date orderDate, Date requiredDate, Date shippedDate, String comments, Customer customer, Status status,
-	    long version) {
+    public Order(Date orderDate, Date requiredDate, Date shippedDate, String comments, Customer customer,
+	    Status status) {
 	this.orderDate = orderDate;
 	this.requiredDate = requiredDate;
 	this.shippedDate = shippedDate;
 	this.comments = comments;
 	this.customer = customer;
 	this.status = status;
+	orderdetails = new LinkedHashSet<>();
     }
-    
+
     protected Order() {
-	
+
     }
 
     public long getId() {
-        return id;
+	return id;
     }
 
     public Date getOrderDate() {
-        return orderDate;
+	return orderDate;
     }
 
     public Date getRequiredDate() {
-        return requiredDate;
+	return requiredDate;
     }
 
     public Date getShippedDate() {
-        return shippedDate;
+	return shippedDate;
     }
 
     public String getComments() {
-        return comments;
+	return comments;
     }
 
     public Customer getCustomer() {
-        return customer;
+	return customer;
+    }
+
+    public Set<OrderDetail> getOrderdetails() {
+	return orderdetails;
+    }
+
+    public void setCustomer(Customer customer) {
+	if (this.customer != null && this.customer.getOrders().contains(this)) {
+	    this.customer.remove(this); // als de andere kant nog niet
+					// bijgewerkt is werk je de andere kant
+					// bij
+	}
+	this.customer = customer;
+	if (customer != null && !customer.getOrders().contains(this)) {
+	    customer.add(this); // als de andere kant nog niet bijgewerkt is
+	} // werk je de andere kant bij
     }
 
     public Status getStatus() {
-        return status;
-    }
-    
-    public void setCustomer(Customer customer) {
-	if (this.customer != null && this.customer.getOrders().contains(this)) {
-	    this.customer.remove(this); 	// als de andere kant nog niet bijgewerkt is
-	} 				// werk je de andere kant bij
-	this.customer = customer;
-	if (customer != null && !customer.getOrders().contains(this)) {
-	    customer.add(this); 	// als de andere kant nog niet bijgewerkt is
-	}			// werk je de andere kant bij
+	return status;
     }
 
     @Override
@@ -124,7 +137,7 @@ public class Order implements Serializable {
 	    return false;
 	return true;
     }
-        
+
     @Override
     public int hashCode() {
 	final int prime = 31;
@@ -134,16 +147,5 @@ public class Order implements Serializable {
 	result = prime * result + ((requiredDate == null) ? 0 : requiredDate.hashCode());
 	return result;
     }
-    
-    
-    
+
 }
-
-
-
-
-
-
-
-
-

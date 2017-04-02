@@ -13,7 +13,7 @@ public class Adres implements Serializable {
     private String city;
     private String state;
     private String postalCode;
-
+    
     public Adres(String streetAndNumber, String city, String state, String postalCode) {
 	this.streetAndNumber = streetAndNumber;
 	this.city = city;
@@ -40,7 +40,7 @@ public class Adres implements Serializable {
     public String getPostalCode() {
         return postalCode;
     }
-
+    
     @Override
     public int hashCode() {
 	final int prime = 31;

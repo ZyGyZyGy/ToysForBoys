@@ -7,9 +7,12 @@ import java.util.Set;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -36,6 +39,10 @@ public class Customer implements Serializable {
     @Embedded
     private Adres adres;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "countryId")
+    private Country country;
+    
     @Version
     private long version;
 
@@ -59,6 +66,10 @@ public class Customer implements Serializable {
 
     public Adres getAdres() {
         return adres;
+    }
+    
+    public Country getCountry() {
+	return country;
     }
     
     public void setAdres(Adres adres) {

@@ -162,13 +162,14 @@ a:hover {
 }
 
 dt {
-	float: left;
 	width: 15em;
 }
 
 dd {
 	margin-left: 15em;
 	font-weight: bold;
+	margin: 0;
+	margin-bottom: 20px;
 }
 
 .pagineren {

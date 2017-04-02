@@ -9,18 +9,43 @@
 </head>
 <body>
 	<v:menu />
-	<h2>${order.id}</h2>
+	<h2>${not empty order.id ? 'Order' : ''} ${order.id}<span>${fouten.id}</span></h2>
 	<dl>
 		<dt>Ordered:</dt>
 		<dd>${order.orderDate}</dd>
 		<dt>Required:</dt>
 		<dd>${order.requiredDate}</dd>
-		<dt>Customer</dt>
-		<dd>${order.name}<br>
-			${order.adres.street}<br>
-			${order.adres.postalCode} ${order.adres.city} ${order.adres.state}<br>
+		<dt>Customer:</dt>
+		<dd>${order.customer.name}<br>
+			${order.customer.adres.streetAndNumber}<br>
+			${order.customer.adres.postalCode} ${order.customer.adres.city} ${order.customer.adres.state}<br>
+			${order.customer.country.name}
 		</dd>
+		<dt>Comments:</dt>
+		<dd>${order.comments}</dd>
+		<dt>Details:</dt>
+		<dd>
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th><th>Price each</th><th>Quantity</th><th>Value</th><th>Deliverable</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${order.orderdetails}" var="orderdetail">
+						<tr>
+							<td>${orderdetail.product.name}</td>
+							<td>${orderdetail.priceEach}</td>
+							<td>${orderdetail.quantityOrdered}</td>
+							<td>${product.value}</td>
+							<td>nog af te werken</td> 
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</dd>
+		<dt>Value:</dt>
+		<dd>nog af te werken</dd>
 	</dl>
-	
 </body>
 </html>
