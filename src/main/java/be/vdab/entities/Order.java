@@ -59,8 +59,8 @@ public class Order implements Serializable {
     @Version
     private long version;
     
-    @ManyToMany(mappedBy = "orders")
-    private Set<Product> products;
+//    @ManyToMany(mappedBy = "orders")
+//    private Set<Product> products;
     
     @ElementCollection
     @CollectionTable(name = "orderdetails", 
@@ -76,7 +76,7 @@ public class Order implements Serializable {
 	this.comments = comments;
 	this.customer = customer;
 	this.status = status;
-	products = new LinkedHashSet<>();
+//	products = new LinkedHashSet<>();
 	orderDetails = new LinkedHashSet<>();
     }
 
@@ -124,9 +124,9 @@ public class Order implements Serializable {
 	return status;
     }
     
-    public Set<Product> getProducts() {
-	return Collections.unmodifiableSet(products);
-    }
+//    public Set<Product> getProducts() {
+//	return Collections.unmodifiableSet(products);
+//    }
     
     public Set<OrderDetail> getOrderDetails() {
         return Collections.unmodifiableSet(orderDetails);

@@ -43,11 +43,11 @@ public class Product implements Serializable {
     @Version
     private long version;
     
-    @ManyToMany
-    @JoinTable(name = "orderdetails",
-    	joinColumns = @JoinColumn(name = "productid"), 
-    	inverseJoinColumns = @JoinColumn(name = "orderid"))
-    private Set<Order> orders = new LinkedHashSet<>();
+//    @ManyToMany
+//    @JoinTable(name = "orderdetails",
+//    	joinColumns = @JoinColumn(name = "productid"), 
+//    	inverseJoinColumns = @JoinColumn(name = "orderid"))
+//    private Set<Order> orders = new LinkedHashSet<>();
     
 //    @ElementCollection
 //    @CollectionTable(name = "orderdetails", 
@@ -105,13 +105,14 @@ public class Product implements Serializable {
 	return productlineId;
     }
     
-    public Set<Order> getOrders() {
-        return Collections.unmodifiableSet(orders);
-    }
-    
-//    public Set<OrderDetail> getOrderDetails() {
-//	return orderDetails;
+//    public Set<Order> getOrders() {
+//        return Collections.unmodifiableSet(orders);
 //    }
+    
+//  public Set<OrderDetail> getOrderDetails() {
+//	return orderDetails;
+//  }
+    
 //    
 //    public void add(OrderDetail orderDetail) {
 //	orderDetails.add(orderDetail);

@@ -18,9 +18,9 @@ public class OrderDetail implements Serializable {
     private long quantityOrdered;
     private BigDecimal priceEach;  
     
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "productid")
-//    private Product product;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "productid")
+    private Product product;
 
     public OrderDetail(long quantityOrdered, BigDecimal priceEach) {
 	this.quantityOrdered = quantityOrdered;
@@ -43,9 +43,9 @@ public class OrderDetail implements Serializable {
 	return priceEach.multiply(BigDecimal.valueOf(quantityOrdered));
     }
     
-//    public Product getProduct() {
-//	return product;
-//    }
+    public Product getProduct() {
+	return product;
+    }
     
 //    public void setProduct(Product product) {
 //	if (this.product != null && this.product.getOrderDetails().contains(this)) {

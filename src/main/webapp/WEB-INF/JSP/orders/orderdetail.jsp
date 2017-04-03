@@ -25,7 +25,7 @@
 		<dd>${order.comments}</dd>
 		<dt>Details:</dt>
 		<dd>
-			<table>
+			<table class="detailTabel">
 				<thead>
 					<tr>
 						<th>Product</th><th>Price each</th><th>Quantity</th><th>Value</th><th>Deliverable</th>
@@ -34,11 +34,20 @@
 				<tbody>
 					<c:forEach items="${order.orderDetails}" var="orderDetail">
 						<tr>
+							<td>${orderDetail.product.name}</td>
 							<td>${orderDetail.priceEach}</td>
 							<td>${orderDetail.quantityOrdered}</td>
-							<td>?</td>
-							<td>?</td>
-							<td>?</td>
+							<td>${orderDetail.value}</td>
+							<td class="deliverable">
+								<c:choose>
+									<c:when test="${orderDetail.quantityOrdered <= orderDetail.product.quantityInStock}">
+										<span class="groen">&check;</span>
+									</c:when>
+									<c:otherwise>
+										<span class="rood">&cross;</span>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
