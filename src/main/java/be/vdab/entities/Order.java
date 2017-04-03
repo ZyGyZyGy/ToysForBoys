@@ -1,10 +1,14 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,14 +17,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import be.vdab.enums.Status;
+import be.vdab.valueobjects.OrderDetail;
 
 @Entity
 @Table(name = "orders")
@@ -47,15 +53,21 @@ public class Order implements Serializable {
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderDetail> orderdetails;
-
     @Enumerated(EnumType.STRING)
     private Status status;
 
     @Version
     private long version;
-
+    
+    @ManyToMany(mappedBy = "orders")
+    private Set<Product> products;
+    
+    @ElementCollection
+    @CollectionTable(name = "orderdetails", 
+    	joinColumns = @JoinColumn(name = "orderid"))
+    @OrderBy("productid")
+    private Set<OrderDetail> orderDetails;
+    
     public Order(Date orderDate, Date requiredDate, Date shippedDate, String comments, Customer customer,
 	    Status status) {
 	this.orderDate = orderDate;
@@ -64,7 +76,8 @@ public class Order implements Serializable {
 	this.comments = comments;
 	this.customer = customer;
 	this.status = status;
-	orderdetails = new LinkedHashSet<>();
+	products = new LinkedHashSet<>();
+	orderDetails = new LinkedHashSet<>();
     }
 
     protected Order() {
@@ -95,10 +108,6 @@ public class Order implements Serializable {
 	return customer;
     }
 
-    public Set<OrderDetail> getOrderdetails() {
-	return orderdetails;
-    }
-
     public void setCustomer(Customer customer) {
 	if (this.customer != null && this.customer.getOrders().contains(this)) {
 	    this.customer.remove(this); // als de andere kant nog niet
@@ -114,7 +123,31 @@ public class Order implements Serializable {
     public Status getStatus() {
 	return status;
     }
-
+    
+    public Set<Product> getProducts() {
+	return Collections.unmodifiableSet(products);
+    }
+    
+    public Set<OrderDetail> getOrderDetails() {
+        return Collections.unmodifiableSet(orderDetails);
+    }
+    
+    public void add(OrderDetail orderdetail) {
+	orderDetails.add(orderdetail);
+    }
+    
+    public void remove(OrderDetail orderdetail) {
+	orderDetails.remove(orderdetail);
+    }
+    
+    public BigDecimal getTotalValue() {
+	BigDecimal totalValue = BigDecimal.ZERO;
+	for(OrderDetail orderDetail : orderDetails) {
+	    totalValue = totalValue.add(orderDetail.getValue());
+	}
+	return totalValue;
+    }
+    
     @Override
     public boolean equals(Object obj) {
 	if (!(obj instanceof Order))

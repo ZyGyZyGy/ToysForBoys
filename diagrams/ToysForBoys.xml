@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
 	<entity>
+		<entity-name>be.vdab.entities.Country</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>166</entity-height>
+		<entity-X-Coordinate>250</entity-X-Coordinate>
+		<entity-Y-Coordinate>358</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>be.vdab.entities.Product</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>306</entity-height>
+		<entity-X-Coordinate>885</entity-X-Coordinate>
+		<entity-Y-Coordinate>234</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
 		<entity-name>be.vdab.entities.Order</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>266</entity-height>
-		<entity-X-Coordinate>444</entity-X-Coordinate>
-		<entity-Y-Coordinate>11</entity-Y-Coordinate>
+		<entity-height>286</entity-height>
+		<entity-X-Coordinate>543</entity-X-Coordinate>
+		<entity-Y-Coordinate>26</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -14,8 +36,8 @@
 		<entity-name>be.vdab.valueobjects.Adres</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>130</entity-height>
-		<entity-X-Coordinate>0</entity-X-Coordinate>
-		<entity-Y-Coordinate>248</entity-Y-Coordinate>
+		<entity-X-Coordinate>30</entity-X-Coordinate>
+		<entity-Y-Coordinate>187</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -25,30 +47,8 @@
 		<entity-name>be.vdab.entities.Customer</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>206</entity-height>
-		<entity-X-Coordinate>148</entity-X-Coordinate>
-		<entity-Y-Coordinate>27</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>be.vdab.entities.Country</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>166</entity-height>
-		<entity-X-Coordinate>151</entity-X-Coordinate>
-		<entity-Y-Coordinate>370</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>be.vdab.entities.Product</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>248</entity-height>
-		<entity-X-Coordinate>790</entity-X-Coordinate>
-		<entity-Y-Coordinate>239</entity-Y-Coordinate>
+		<entity-X-Coordinate>250</entity-X-Coordinate>
+		<entity-Y-Coordinate>23</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -57,9 +57,9 @@
 	<entity>
 		<entity-name>be.vdab.entities.OrderDetail</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>186</entity-height>
-		<entity-X-Coordinate>780</entity-X-Coordinate>
-		<entity-Y-Coordinate>27</entity-Y-Coordinate>
+		<entity-height>206</entity-height>
+		<entity-X-Coordinate>543</entity-X-Coordinate>
+		<entity-Y-Coordinate>453</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

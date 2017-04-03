@@ -9,12 +9,12 @@
 </head>
 <body>
 	<v:menu />
-	<h2>${not empty order.id ? 'Order' : ''} ${order.id}<span>${fouten.id}</span></h2>
+	<h2>Order ${order.id}<span>${fouten.id}</span></h2>
 	<dl>
 		<dt>Ordered:</dt>
-		<dd>${order.orderDate}</dd>
+		<dd><fmt:formatDate value="${order.orderDate}" type="date" dateStyle="short" pattern="dd/MM/yy"/></dd>
 		<dt>Required:</dt>
-		<dd>${order.requiredDate}</dd>
+		<dd><fmt:formatDate value="${order.requiredDate}" type="date" dateStyle="short" pattern="dd/MM/yy"/></dd>
 		<dt>Customer:</dt>
 		<dd>${order.customer.name}<br>
 			${order.customer.adres.streetAndNumber}<br>
@@ -32,20 +32,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${order.orderdetails}" var="orderdetail">
+					<c:forEach items="${order.orderDetails}" var="orderDetail">
 						<tr>
-							<td>${orderdetail.product.name}</td>
-							<td>${orderdetail.priceEach}</td>
-							<td>${orderdetail.quantityOrdered}</td>
-							<td>${product.value}</td>
-							<td>nog af te werken</td> 
+							<td>${orderDetail.priceEach}</td>
+							<td>${orderDetail.quantityOrdered}</td>
+							<td>?</td>
+							<td>?</td>
+							<td>?</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</dd>
 		<dt>Value:</dt>
-		<dd>nog af te werken</dd>
+		<dd><fmt:formatNumber value="${order.totalValue}"/></dd>
 	</dl>
 </body>
 </html>

@@ -172,6 +172,10 @@ dd {
 	margin-bottom: 20px;
 }
 
+dd table {
+	float: left;
+}
+
 .pagineren {
 	font-size: x-large;
 }

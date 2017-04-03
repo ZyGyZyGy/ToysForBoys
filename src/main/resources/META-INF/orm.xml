@@ -10,4 +10,12 @@
 			from Order o
 		</query>
 	</named-query>
+<!-- 	<named-query name="OrderDetail.findOrderDetailByOrderId"> -->
+<!-- 		<query> -->
+<!-- 			select od.orderid, od.productid -->
+<!-- 			from Order o join fetch OrderDetail od -->
+<!-- 			join fetch Product p -->
+<!-- 			where o.id = :orderid -->
+<!-- 		</query> -->
+<!-- 	</named-query> -->
 </entity-mappings> 

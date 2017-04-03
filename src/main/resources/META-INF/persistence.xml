@@ -13,7 +13,7 @@
 		<class>be.vdab.valueobjects.Adres</class>
 		<class>be.vdab.entities.Country</class>
 		<class>be.vdab.entities.Product</class>
-		<class>be.vdab.entities.OrderDetail</class>
+		<class>be.vdab.valueobjects.OrderDetail</class> 
 		<properties>
 			<property name='hibernate.show_sql' value='true' />
 			<property name='hibernate.format_sql' value='true' />
