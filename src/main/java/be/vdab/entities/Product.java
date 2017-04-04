@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import be.vdab.exceptions.VoorraadException;
+
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
@@ -72,7 +74,12 @@ public class Product implements Serializable {
     }
     
     public void reduceQuantityInStock(long quantity) {
-	this.quantityInStock -= quantity;
+	if (quantity <= quantityInStock) {
+	    this.quantityInStock -= quantity;
+	} else {
+	    throw new VoorraadException();
+	}
+	
     }
 
     public long getQuantityInOrder() {

@@ -2,11 +2,10 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.sql.Date;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -21,10 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
-import javax.persistence.PersistenceException;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import be.vdab.enums.Status;
@@ -40,7 +36,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE) // bij java.sql.Date - niet nodig
     private Date orderDate;
 
 //    @Temporal(TemporalType.DATE)
@@ -141,29 +137,17 @@ public class Order implements Serializable {
 	orderDetails.remove(orderdetail);
     }
     
-    public boolean ship() {
-	boolean gelukt = true;
-	for (OrderDetail orderDetail : orderDetails) {
-	    long quantityOrdered = orderDetail.getQuantityOrdered();
-	    if (orderDetail.getProduct().getQuantityInStock() >= quantityOrdered) {
-		orderDetail.getProduct().reduceQuantityInOrder(quantityOrdered);
-		orderDetail.getProduct().reduceQuantityInStock(quantityOrdered);
-		shippedDate = java.sql.Date.valueOf(LocalDate.now());
-		status = status.SHIPPED;
-	    } else {
-		gelukt = false;
-	    }
-
-	}
-	return gelukt;
-    }
-    
     public BigDecimal getTotalValue() {
 	BigDecimal totalValue = BigDecimal.ZERO;
 	for(OrderDetail orderDetail : orderDetails) {
 	    totalValue = totalValue.add(orderDetail.getValue());
 	}
 	return totalValue;
+    }
+    
+    public void setAsShipped() {
+	status = status.SHIPPED;
+	shippedDate = Date.valueOf(LocalDate.now());
     }
     
     @Override
@@ -202,7 +186,7 @@ public class Order implements Serializable {
     
     
     
-    
+// ============================ QUARANTINE ============================
     
 //  public Set<Product> getProducts() {
 //	return Collections.unmodifiableSet(products);
@@ -211,4 +195,23 @@ public class Order implements Serializable {
 //  @ManyToMany(mappedBy = "orders")
 //  private Set<Product> products;
 
+    
+    
+    
+//  public boolean ship() {
+//	boolean gelukt = true;
+//	for (OrderDetail orderDetail : orderDetails) {
+//	    long quantityOrdered = orderDetail.getQuantityOrdered();
+//	    if (orderDetail.getProduct().getQuantityInStock() >= quantityOrdered) {
+//		orderDetail.getProduct().reduceQuantityInOrder(quantityOrdered);
+//		orderDetail.getProduct().reduceQuantityInStock(quantityOrdered);
+//		shippedDate = java.sql.Date.valueOf(LocalDate.now());
+//		status = status.SHIPPED;
+//	    } else {
+//		gelukt = false;
+//	    }
+//
+//	}
+//	return gelukt;
+//  }
 }

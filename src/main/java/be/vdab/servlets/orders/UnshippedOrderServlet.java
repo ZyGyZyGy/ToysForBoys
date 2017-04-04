@@ -1,7 +1,6 @@
 package be.vdab.servlets.orders;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import be.vdab.entities.Order;
 import be.vdab.services.OrderDetailService;
 import be.vdab.services.OrderService;
 
@@ -31,10 +29,14 @@ public class UnshippedOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
-	String[] orderIds =  request.getParameterValues("id");
-	if (orderIds != null) {
-	    orderService.ship(orderIds);
+	String[] orderIds =  request.getParameterValues("ship");
+	if (orderIds != null) { 
+	    for (String orderId : orderIds) {
+		orderService.read(Long.parseLong(orderId))
+			.ifPresent(order -> orderService.ship(order));
+	    }
 	}
+	response.sendRedirect(request.getRequestURI());
     }
 
 }
