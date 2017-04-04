@@ -2,25 +2,13 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Version;
-
-import be.vdab.valueobjects.OrderDetail;
 
 @Entity
 @Table(name = "products")
@@ -43,20 +31,6 @@ public class Product implements Serializable {
     @Version
     private long version;
     
-//    @ManyToMany
-//    @JoinTable(name = "orderdetails",
-//    	joinColumns = @JoinColumn(name = "productid"), 
-//    	inverseJoinColumns = @JoinColumn(name = "orderid"))
-//    private Set<Order> orders = new LinkedHashSet<>();
-    
-//    @ElementCollection
-//    @CollectionTable(name = "orderdetails", 
-//    	joinColumns = @JoinColumn(name = "productid"))
-//    @OrderBy("productid")
-//    private Set<OrderDetail> orderDetails;
-    
-//    private Set<OrderDetail> orderDetails;
-    
     public Product(String name, String scale, String description, long quantityInStock, long quantityInOrder,
 	    BigDecimal buyPrice, long productlineId) {
 	this.name = name;
@@ -72,7 +46,7 @@ public class Product implements Serializable {
     public Product() {
 
     }
-
+    
     public long getId() {
 	return id;
     }
@@ -92,9 +66,25 @@ public class Product implements Serializable {
     public long getQuantityInStock() {
 	return quantityInStock;
     }
+    
+    public void setQuantityInStock(long quantityInStock) {
+        this.quantityInStock = quantityInStock;
+    }
+    
+    public void reduceQuantityInStock(long quantity) {
+	this.quantityInStock -= quantity;
+    }
 
     public long getQuantityInOrder() {
 	return quantityInOrder;
+    }
+    
+    public void setQuantityInOrder(long quantityInOrder) {
+        this.quantityInOrder = quantityInOrder;
+    } 
+    
+    public void reduceQuantityInOrder(long quantity) {
+	this.quantityInOrder -= quantity;
     }
 
     public BigDecimal getBuyPrice() {
@@ -105,22 +95,7 @@ public class Product implements Serializable {
 	return productlineId;
     }
     
-//    public Set<Order> getOrders() {
-//        return Collections.unmodifiableSet(orders);
-//    }
-    
-//  public Set<OrderDetail> getOrderDetails() {
-//	return orderDetails;
-//  }
-    
-//    
-//    public void add(OrderDetail orderDetail) {
-//	orderDetails.add(orderDetail);
-//    }
-//    
-//    public void remove(OrderDetail orderDetail) {
-//	orderDetails.remove(orderDetail);
-//    }
+
 
     @Override
     public int hashCode() {
@@ -145,6 +120,53 @@ public class Product implements Serializable {
 	} else if (!name.equals(other.name))
 	    return false;
 	return true;
-    }       
+    }
 
+     
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+// =============================== mogelijk onnodig ==============================    
+        
+//  public Set<Order> getOrders() {
+//  return Collections.unmodifiableSet(orders);
+//}
+
+//public Set<OrderDetail> getOrderDetails() {
+//	return orderDetails;
+//}
+
+//
+//public void add(OrderDetail orderDetail) {
+//	orderDetails.add(orderDetail);
+//}
+//
+//public void remove(OrderDetail orderDetail) {
+//	orderDetails.remove(orderDetail);
+//}
+    
+    
+//  @ManyToMany
+//  @JoinTable(name = "orderdetails",
+//  	joinColumns = @JoinColumn(name = "productid"), 
+//  	inverseJoinColumns = @JoinColumn(name = "orderid"))
+//  private Set<Order> orders = new LinkedHashSet<>();
+  
+//  @ElementCollection
+//  @CollectionTable(name = "orderdetails", 
+//  	joinColumns = @JoinColumn(name = "productid"))
+//  @OrderBy("productid")
+//  private Set<OrderDetail> orderDetails;
+  
+//  private Set<OrderDetail> orderDetails;
+    
+    
+    
 }

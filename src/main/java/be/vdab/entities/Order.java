@@ -2,9 +2,11 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -17,9 +19,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
+import javax.persistence.PersistenceException;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,13 +40,13 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date orderDate;
 
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date requiredDate;
 
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date shippedDate;
 
     private String comments;
@@ -58,9 +60,6 @@ public class Order implements Serializable {
 
     @Version
     private long version;
-    
-//    @ManyToMany(mappedBy = "orders")
-//    private Set<Product> products;
     
     @ElementCollection
     @CollectionTable(name = "orderdetails", 
@@ -124,13 +123,15 @@ public class Order implements Serializable {
 	return status;
     }
     
-//    public Set<Product> getProducts() {
-//	return Collections.unmodifiableSet(products);
-//    }
-    
     public Set<OrderDetail> getOrderDetails() {
         return Collections.unmodifiableSet(orderDetails);
     }
+    
+//    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+//	if (this.orderDetails != null && this.orderDetails.) {
+//	    
+//	}
+//    }
     
     public void add(OrderDetail orderdetail) {
 	orderDetails.add(orderdetail);
@@ -138,6 +139,23 @@ public class Order implements Serializable {
     
     public void remove(OrderDetail orderdetail) {
 	orderDetails.remove(orderdetail);
+    }
+    
+    public boolean ship() {
+	boolean gelukt = true;
+	for (OrderDetail orderDetail : orderDetails) {
+	    long quantityOrdered = orderDetail.getQuantityOrdered();
+	    if (orderDetail.getProduct().getQuantityInStock() >= quantityOrdered) {
+		orderDetail.getProduct().reduceQuantityInOrder(quantityOrdered);
+		orderDetail.getProduct().reduceQuantityInStock(quantityOrdered);
+		shippedDate = java.sql.Date.valueOf(LocalDate.now());
+		status = status.SHIPPED;
+	    } else {
+		gelukt = false;
+	    }
+
+	}
+	return gelukt;
     }
     
     public BigDecimal getTotalValue() {
@@ -180,5 +198,17 @@ public class Order implements Serializable {
 	result = prime * result + ((requiredDate == null) ? 0 : requiredDate.hashCode());
 	return result;
     }
+    
+    
+    
+    
+    
+    
+//  public Set<Product> getProducts() {
+//	return Collections.unmodifiableSet(products);
+//  }
+        
+//  @ManyToMany(mappedBy = "orders")
+//  private Set<Product> products;
 
 }
