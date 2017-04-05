@@ -10,6 +10,13 @@
 <body>
 	<v:menu />
 	<h1>Unshipped orders</h1>
+	<c:if test="${not empty mislukteOrders}">
+		Shipping failed for order(s) 
+		<c:forEach items="${mislukteOrders}" var="mislukteOrder">
+			${mislukteOrder.id},&nbsp;
+		</c:forEach>
+		not enough in stock
+	</c:if>
 	<form method="post">
 		<table>
 			<thead>
@@ -50,8 +57,46 @@
 					</c:if>
 				</c:forEach>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5">
+						<div class="pijltjes">
+							<c:if test="${vanafRij != 0}">
+								<c:url value="" var="vorigePaginaURL">
+									<c:param name="vanafRij" value="${vanafRij - aantalRijen}" />
+								</c:url>
+							</c:if>
+							<a href="<c:out value='${vorigePaginaURL}'/>"
+								title="vorige pagina" class="pagineren">&larr;</a>
+
+							<c:if test="${empty laatstePagina}">
+								<c:url value="" var="volgendePaginaURL">
+									<c:param name="vanafRij" value="${vanafRij + aantalRijen}" />
+								</c:url>
+								<a href="<c:out value='${volgendePaginaURL}'/>"
+									title="volgende pagina" class="pagineren">&rarr;</a>
+							</c:if>
+						</div>
+					</td>
+					<td colspan="2" align="right"><input type="submit" value="Set as shipped"></td>
+				</tr>
+			</tfoot>
 		</table>
-		<input type="submit" value="Set as shipped">
+		
+		
+		
+		
 	</form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

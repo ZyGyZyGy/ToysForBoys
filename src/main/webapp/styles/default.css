@@ -50,6 +50,7 @@ nav>ul>li>a, nav ul li ul li a {
 }
 
 h1 {
+	text-align: center;
 	clear: both;
 }
 
@@ -65,7 +66,7 @@ table, th, td {
 	padding: 2px 5px;
 }
 
-thead tr, tfoot tr {
+thead tr {
 	color: white;
 	background-color: gray;
 }
@@ -87,11 +88,26 @@ tbody tr:hover {
 	background-color: #FFEC9F;
 }
 
+tfoot, tfoot tr, tfoot td {
+	border: 1px solid lightblue;
+}
+
 .status {
 	width: 120px;
 }
 
 /*====================================================================== ======================================================================*/
+
+input[type="submit"] {
+	margin-top: 15px;
+}
+
+.pijltjes {
+	display: block;
+	width: 60px;
+	margin: 0	 auto;	
+}
+
 label {
 	cursor: pointer;
 }

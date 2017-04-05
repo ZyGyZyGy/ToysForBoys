@@ -16,8 +16,8 @@ public class OrderService extends AbstractService {
 
     private final OrderRepository orderRepository = new OrderRepository();
     
-    public List<Order> findAll() {
-	return orderRepository.findAll();
+    public List<Order> findAll(int vanafRij, int aantalRijen) {
+	return orderRepository.findAll(vanafRij, aantalRijen);
     }
     
     public Optional<Order> read(long id) {
