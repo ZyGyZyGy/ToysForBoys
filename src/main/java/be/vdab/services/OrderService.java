@@ -25,8 +25,8 @@ public class OrderService extends AbstractService {
     }
     
     public void ship(Order order) {
+	beginTransaction();
 	try {
-	    beginTransaction();
 	    order.setAsShipped();
 	    order.getOrderDetails()
 	    	.stream()

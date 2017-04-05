@@ -11,11 +11,28 @@
 	<v:menu />
 	<h1>Unshipped orders</h1>
 	<c:if test="${not empty mislukteOrders}">
-		Shipping failed for order(s) 
-		<c:forEach items="${mislukteOrders}" var="mislukteOrder">
-			${mislukteOrder.id},&nbsp;
-		</c:forEach>
-		not enough in stock
+		<div class="foutmelding">
+			Shipping failed for order(s) 
+			<c:forEach items="${mislukteOrders}" var="mislukteOrder" varStatus="status">
+				${mislukteOrder.id}
+				<c:if test="${not status.last}">
+					,&nbsp;
+				</c:if>
+			</c:forEach>
+			<ul>
+				<c:if test="${not empty fouten.reden1}">
+					<li>
+						${fouten.reden1}
+					</li>
+				</c:if>
+				<c:if test="${not empty fouten.reden2}">
+					<li>
+						${fouten.reden2}
+					</li>
+				</c:if>
+			</ul>
+<!-- 			not enough in stock -->
+		</div>
 	</c:if>
 	<form method="post">
 		<table>
@@ -35,7 +52,7 @@
 							<td><fmt:formatDate value="${order.orderDate}" type="date" dateStyle="short"/></td>
 							<td><fmt:formatDate value="${order.requiredDate}" type="date" dateStyle="short"/></td>
 							<td>${order.customer.name}</td>
-							<td>${order.comments}</td>
+							<td>${order.comments}</td> <%-- to do no comment --%>
 							<td class="status"><img src="<c:url value='/images/${order.status}.png'/>">&nbsp;
 								<c:choose>
 									<c:when test="${order.status == 'PROCESSING'}">

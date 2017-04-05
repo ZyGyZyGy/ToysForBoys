@@ -2,7 +2,10 @@ package be.vdab.servlets.orders;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import be.vdab.entities.Order;
+import be.vdab.exceptions.RecordAangepastException;
 import be.vdab.exceptions.VoorraadException;
 import be.vdab.services.OrderService;
 
@@ -49,22 +53,39 @@ public class UnshippedOrderServlet extends HttpServlet {
 	    throws ServletException, IOException {
 	String[] orderIds = request.getParameterValues("ship");
 	List<Order> mislukteOrders = new ArrayList<>();
+	Map<String, String> fouten = new HashMap<>();
 	if (orderIds != null) {
-	    for (String orderId : orderIds) {
-		try {
-		    orderService.read(Long.parseLong(orderId)).ifPresent(order -> orderService.ship(order));
-		} catch (VoorraadException ex) {
-		    orderService.read(Long.parseLong(orderId)).ifPresent(order -> mislukteOrders.add(order));
+	    if (fouten.isEmpty()) {
+		for (String orderId : orderIds) {
+		    try {
+			orderService.read(Long.parseLong(orderId)).ifPresent(order -> orderService.ship(order));
+		    } catch (VoorraadException ex) {
+			orderService.read(Long.parseLong(orderId)).ifPresent(order -> mislukteOrders.add(order));
+			fouten.put("reden1", "not enough in stock");
+		    } catch (RecordAangepastException ex) {
+			orderService.read(Long.parseLong(orderId)).ifPresent(order -> mislukteOrders.add(order));
+			fouten.put("reden2", "deze order(s) zijn al door een andere gebruiker aangepast");
+		    }
 		}
 	    }
 	}
-	if (mislukteOrders.isEmpty()) {
-	    response.sendRedirect(request.getRequestURI());
-	} else {
+	if (!fouten.isEmpty()) {
 	    pagineren(request, response);
+	    request.setAttribute("fouten", fouten);
 	    request.setAttribute("mislukteOrders", mislukteOrders);
 	    request.getRequestDispatcher(VIEW).forward(request, response);
+	} else {
+	    response.sendRedirect(request.getRequestURI());
 	}
+	
+//	if (mislukteOrders.isEmpty()) {
+//	    response.sendRedirect(request.getRequestURI());
+//	} else {
+//	    pagineren(request, response);
+//	    request.setAttribute("mislukteOrders", mislukteOrders);
+//	    request.setAttribute("fouten", fouten);
+//	    request.getRequestDispatcher(VIEW).forward(request, response);
+//	}
     }
 
 }

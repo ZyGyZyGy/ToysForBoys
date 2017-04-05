@@ -12,6 +12,8 @@ public class OrderRepository extends AbstractRepository {
 		.createNamedQuery("Order.findAll", Order.class)
 		.setFirstResult(vanafRij)
 		.setMaxResults(aantalRijen)
+		.setHint("javax.persistence.loadgraph", 
+			getEntityManager().createEntityGraph(Order.MET_CUSTOMER))
 		.getResultList();
     }
     

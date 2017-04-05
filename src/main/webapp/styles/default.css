@@ -54,6 +54,13 @@ h1 {
 	clear: both;
 }
 
+.foutmelding {
+	font-weight: bold;
+	color: red;
+	position: relative;
+	left: 230px;
+}
+
 /*====================================================================== table ======================================================================*/
 table {
 	width: 70%;
@@ -97,7 +104,6 @@ tfoot, tfoot tr, tfoot td {
 }
 
 /*====================================================================== ======================================================================*/
-
 input[type="submit"] {
 	margin-top: 15px;
 }
@@ -105,7 +111,7 @@ input[type="submit"] {
 .pijltjes {
 	display: block;
 	width: 60px;
-	margin: 0	 auto;	
+	margin: 0 auto;
 }
 
 label {
@@ -194,14 +200,11 @@ dd table {
 	font-size: x-large;
 }
 
-
 /*====================================================================== kolom - Deliverable ======================================================================*/
-
 .detailTabel {
 	text-align: right;
 	width: auto;
 }
-
 
 .deliverable {
 	text-align: center;
