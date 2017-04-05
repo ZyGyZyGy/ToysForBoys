@@ -26,7 +26,7 @@ public class UnshippedOrderServlet extends HttpServlet {
     private static transient OrderService orderService = new OrderService();
     private static final int AANTAL_RIJEN = 50;
 
-    private void pagineren(HttpServletRequest request, HttpServletResponse response) 
+    private void pagineren(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
 	int vanafRij = request.getParameter("vanafRij") == null ? 0
 		: Integer.parseInt(request.getParameter("vanafRij"));
@@ -40,7 +40,7 @@ public class UnshippedOrderServlet extends HttpServlet {
 	}
 	request.setAttribute("orders", orders);
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
@@ -77,15 +77,6 @@ public class UnshippedOrderServlet extends HttpServlet {
 	} else {
 	    response.sendRedirect(request.getRequestURI());
 	}
-	
-//	if (mislukteOrders.isEmpty()) {
-//	    response.sendRedirect(request.getRequestURI());
-//	} else {
-//	    pagineren(request, response);
-//	    request.setAttribute("mislukteOrders", mislukteOrders);
-//	    request.setAttribute("fouten", fouten);
-//	    request.getRequestDispatcher(VIEW).forward(request, response);
-//	}
     }
 
 }

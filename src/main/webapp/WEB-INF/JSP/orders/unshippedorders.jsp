@@ -31,7 +31,6 @@
 					</li>
 				</c:if>
 			</ul>
-<!-- 			not enough in stock -->
 		</div>
 	</c:if>
 	<form method="post">
@@ -98,11 +97,7 @@
 					<td colspan="2" align="right"><input type="submit" value="Set as shipped"></td>
 				</tr>
 			</tfoot>
-		</table>
-		
-		
-		
-		
+		</table>				
 	</form>
 </body>
 </html>

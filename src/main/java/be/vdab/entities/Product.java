@@ -42,7 +42,6 @@ public class Product implements Serializable {
 	this.quantityInOrder = quantityInOrder;
 	this.buyPrice = buyPrice;
 	this.productlineId = productlineId;
-//	orderDetails = new LinkedHashSet<>();
     }
 
     public Product() {
@@ -79,7 +78,6 @@ public class Product implements Serializable {
 	} else {
 	    throw new VoorraadException();
 	}
-	
     }
 
     public long getQuantityInOrder() {
@@ -102,8 +100,6 @@ public class Product implements Serializable {
 	return productlineId;
     }
     
-
-
     @Override
     public int hashCode() {
 	final int prime = 31;
@@ -129,51 +125,4 @@ public class Product implements Serializable {
 	return true;
     }
 
-     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-// =============================== mogelijk onnodig ==============================    
-        
-//  public Set<Order> getOrders() {
-//  return Collections.unmodifiableSet(orders);
-//}
-
-//public Set<OrderDetail> getOrderDetails() {
-//	return orderDetails;
-//}
-
-//
-//public void add(OrderDetail orderDetail) {
-//	orderDetails.add(orderDetail);
-//}
-//
-//public void remove(OrderDetail orderDetail) {
-//	orderDetails.remove(orderDetail);
-//}
-    
-    
-//  @ManyToMany
-//  @JoinTable(name = "orderdetails",
-//  	joinColumns = @JoinColumn(name = "productid"), 
-//  	inverseJoinColumns = @JoinColumn(name = "orderid"))
-//  private Set<Order> orders = new LinkedHashSet<>();
-  
-//  @ElementCollection
-//  @CollectionTable(name = "orderdetails", 
-//  	joinColumns = @JoinColumn(name = "productid"))
-//  @OrderBy("productid")
-//  private Set<OrderDetail> orderDetails;
-  
-//  private Set<OrderDetail> orderDetails;
-    
-    
-    
 }

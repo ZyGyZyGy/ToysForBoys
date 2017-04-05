@@ -48,34 +48,4 @@ public class OrderService extends AbstractService {
 	}
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-// ============================ QUARANTINE ============================   
-    
-//    public void ship(String[] orderIds) {
-//	beginTransaction();
-//	try {
-//	    Arrays.stream(orderIds)
-//	    	.forEach(id -> orderRepository.read(Long.parseLong(id))
-//	    		.ifPresent(order -> order.ship()));
-//	    commit();
-//	} catch (PersistenceException ex) {
-//	    rollback();
-//	    throw ex;
-//	}
-//    }
 }

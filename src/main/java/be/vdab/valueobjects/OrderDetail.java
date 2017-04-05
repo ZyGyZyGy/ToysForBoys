@@ -47,16 +47,6 @@ public class OrderDetail implements Serializable {
 	return product;
     }
     
-//    public void setProduct(Product product) {
-//	if (this.product != null && this.product.getOrderDetails().contains(this)) {
-//	    this.product.remove(this);
-//	}
-//	this.product = product;
-//	if (product != null && !product.getOrderDetails().contains(this)) {
-//	    product.add(this);
-//	}
-//    }
-
     @Override
     public int hashCode() {
 	final int prime = 31;

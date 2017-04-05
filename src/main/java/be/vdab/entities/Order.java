@@ -44,10 +44,8 @@ public class Order implements Serializable {
 //    @Temporal(TemporalType.DATE) // bij java.sql.Date - niet nodig
     private Date orderDate;
 
-//    @Temporal(TemporalType.DATE)
     private Date requiredDate;
 
-//    @Temporal(TemporalType.DATE)
     private Date shippedDate;
 
     private String comments;
@@ -76,7 +74,6 @@ public class Order implements Serializable {
 	this.comments = comments;
 	this.customer = customer;
 	this.status = status;
-//	products = new LinkedHashSet<>();
 	orderDetails = new LinkedHashSet<>();
     }
 
@@ -127,12 +124,6 @@ public class Order implements Serializable {
     public Set<OrderDetail> getOrderDetails() {
         return Collections.unmodifiableSet(orderDetails);
     }
-    
-//    public void setOrderDetails(Set<OrderDetail> orderDetails) {
-//	if (this.orderDetails != null && this.orderDetails.) {
-//	    
-//	}
-//    }
     
     public void add(OrderDetail orderdetail) {
 	orderDetails.add(orderdetail);
@@ -188,35 +179,4 @@ public class Order implements Serializable {
 	return result;
     }
     
-    
-    
-    
-// ============================ QUARANTINE ============================
-    
-//  public Set<Product> getProducts() {
-//	return Collections.unmodifiableSet(products);
-//  }
-        
-//  @ManyToMany(mappedBy = "orders")
-//  private Set<Product> products;
-
-    
-    
-    
-//  public boolean ship() {
-//	boolean gelukt = true;
-//	for (OrderDetail orderDetail : orderDetails) {
-//	    long quantityOrdered = orderDetail.getQuantityOrdered();
-//	    if (orderDetail.getProduct().getQuantityInStock() >= quantityOrdered) {
-//		orderDetail.getProduct().reduceQuantityInOrder(quantityOrdered);
-//		orderDetail.getProduct().reduceQuantityInStock(quantityOrdered);
-//		shippedDate = java.sql.Date.valueOf(LocalDate.now());
-//		status = status.SHIPPED;
-//	    } else {
-//		gelukt = false;
-//	    }
-//
-//	}
-//	return gelukt;
-//  }
 }
