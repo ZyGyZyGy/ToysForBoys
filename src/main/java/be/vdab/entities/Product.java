@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -28,20 +31,23 @@ public class Product implements Serializable {
     private long quantityInStock;
     private long quantityInOrder;
     private BigDecimal buyPrice;
-    private long productlineId;
 
     @Version
     private long version;
     
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "productlineid")
+    private ProductLine productline;
+    
     public Product(String name, String scale, String description, long quantityInStock, long quantityInOrder,
-	    BigDecimal buyPrice, long productlineId) {
+	    BigDecimal buyPrice, ProductLine productline) {
 	this.name = name;
 	this.scale = scale;
 	this.description = description;
 	this.quantityInStock = quantityInStock;
 	this.quantityInOrder = quantityInOrder;
 	this.buyPrice = buyPrice;
-	this.productlineId = productlineId;
+	this.productline = productline;
     }
 
     public Product() {
@@ -96,8 +102,8 @@ public class Product implements Serializable {
 	return buyPrice;
     }
 
-    public long getProductlineId() {
-	return productlineId;
+    public ProductLine getProductline() {
+	return productline;
     }
     
     @Override

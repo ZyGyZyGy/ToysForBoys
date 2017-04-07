@@ -107,14 +107,12 @@ public class Order implements Serializable {
 
     public void setCustomer(Customer customer) {
 	if (this.customer != null && this.customer.getOrders().contains(this)) {
-	    this.customer.remove(this); // als de andere kant nog niet
-					// bijgewerkt is werk je de andere kant
-					// bij
+	    this.customer.remove(this);
 	}
 	this.customer = customer;
 	if (customer != null && !customer.getOrders().contains(this)) {
-	    customer.add(this); // als de andere kant nog niet bijgewerkt is
-	} // werk je de andere kant bij
+	    customer.add(this);
+	}
     }
 
     public Status getStatus() {

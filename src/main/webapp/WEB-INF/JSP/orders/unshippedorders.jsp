@@ -33,7 +33,7 @@
 			</ul>
 		</div>
 	</c:if>
-	<form method="post">
+	<form method="post" id="shipform">
 		<table>
 			<thead>
 				<tr>
@@ -68,7 +68,7 @@
 									</c:when>
 								</c:choose>
 							</td>
-							<td><input type="checkbox" name="ship" value="${order.id}"></td>
+							<td><input type="checkbox" name="ship" id="ship" value="${order.id}"></td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -94,11 +94,16 @@
 							</c:if>
 						</div>
 					</td>
-					<td colspan="2" align="right"><input type="submit" value="Set as shipped"></td>
+					<td colspan="2" align="right"><input type="submit" value="Set as shipped" id="shipknop"></td>
 				</tr>
 			</tfoot>
 		</table>				
 	</form>
+	<script>
+		document.getElementById('shipform').onsubmit = function() {
+			document.getElementById('shipknop').disabled = true;
+		};
+	</script>
 </body>
 </html>
 

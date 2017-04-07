@@ -22,7 +22,7 @@
 			${order.customer.country.name}
 		</dd>
 		<dt>Comments:</dt>
-		<dd>${order.comments}</dd>
+		<dd>${not empty order.comments ? order.comments : 'N/A'}</dd>
 		<dt>Details:</dt>
 		<dd>
 			<table class="detailTabel">
