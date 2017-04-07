@@ -13,20 +13,9 @@
 	<entity>
 		<entity-name>be.vdab.entities.Product</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>266</entity-height>
+		<entity-height>228</entity-height>
 		<entity-X-Coordinate>96</entity-X-Coordinate>
 		<entity-Y-Coordinate>574</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>be.vdab.entities.ProductLine</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>186</entity-height>
-		<entity-X-Coordinate>363</entity-X-Coordinate>
-		<entity-Y-Coordinate>614</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

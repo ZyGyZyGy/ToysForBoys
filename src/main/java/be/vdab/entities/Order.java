@@ -2,9 +2,8 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -23,6 +22,8 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import be.vdab.enums.Status;
@@ -41,11 +42,13 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @Temporal(TemporalType.DATE) // bij java.sql.Date - niet nodig
-    private Date orderDate;
-
-    private Date requiredDate;
-
+    @Temporal(TemporalType.DATE) 
+    private Date orderDate; 
+    
+    @Temporal(TemporalType.DATE) 
+    private Date requiredDate; 
+    
+    @Temporal(TemporalType.DATE) 
     private Date shippedDate;
 
     private String comments;
@@ -140,8 +143,8 @@ public class Order implements Serializable {
     }
     
     public void setAsShipped() {
-	status = status.SHIPPED;
-	shippedDate = Date.valueOf(LocalDate.now());
+	status = Status.SHIPPED;
+	shippedDate = new Date();
     }
     
     @Override

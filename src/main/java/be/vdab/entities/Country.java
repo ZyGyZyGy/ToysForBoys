@@ -35,7 +35,7 @@ public class Country implements Serializable {
 	customers = new LinkedHashSet<>();
     }
 
-    public Country() {
+    protected Country() { 
 
     }
 
